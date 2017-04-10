@@ -1,0 +1,8 @@
+<h2>Harvest report index</h2>
+
+
+<h5>Record counts</h5>
+<% %w(Project User Task Entry).each do |m| %>
+<p><%= m %>: <%= Object.const_get(m).count %></p>
+
+<% end %>
