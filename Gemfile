@@ -35,6 +35,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'harvested'
 gem 'figaro' # For managing secrets - ex: figaro heroku:set -e production
 
 group :development, :test do
