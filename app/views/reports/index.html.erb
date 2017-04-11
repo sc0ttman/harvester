@@ -27,12 +27,12 @@
 
     <% group.each do |entry|  %>
     <tr>
-      <td><%= entry.spent_at %></td>
-      <td><%= entry.user.organization.name %></td>
-      <td><%= entry.project.name %></td>
-      <td><%= entry.task.name %></td>
-      <td><%= entry.user.full_name %></td>
-      <td><%= entry.hours %></td>
+      <td><small><%= entry.spent_at %></small></td>
+      <td><small><%= entry.user.organization.name %></small></td>
+      <td><small><%= entry.project.name %></small></td>
+      <td><small><%= entry.task.name %></small></td>
+      <td><small><%= entry.user.full_name %></small></td>
+      <td><small><%= entry.hours %></small></td>
     </tr>
     <% end %>
   <% end %>
