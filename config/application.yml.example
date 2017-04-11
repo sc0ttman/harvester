@@ -11,11 +11,9 @@
 #   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
 
 # Currently this app requires at least 2 Harvest accounts in order to
-# aggregate time sheets for a shared project
-# Keep the actual file out of version control.
+# aggregate time sheet data for a shared project.
 # To set ENV vars on Heroku run: $ figaro heroku:set -e production
-
-Ex:
+# Currently the app requires the following: 
 harvest_paradem_subdomain: myharvestsubdomain
 harvest_paradem_username:
 harvest_paradem_password:

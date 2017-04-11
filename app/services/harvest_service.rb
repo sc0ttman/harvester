@@ -26,4 +26,8 @@ class HarvestService
     @project ||= @client.projects.find(@project_id)
   end
 
+  def find_organization
+    Organization.where(harvest_project: @project_id).first
+  end
+
 end
