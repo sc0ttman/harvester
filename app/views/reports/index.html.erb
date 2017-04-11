@@ -2,7 +2,7 @@
 
 
 <h5>Record counts</h5>
-<% %w(Project User Task Entry).each do |m| %>
+<% %w(Organization Project User Task Entry).each do |m| %>
 <p><%= m %>: <%= Object.const_get(m).count %></p>
 
 <% end %>
