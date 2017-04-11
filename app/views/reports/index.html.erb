@@ -1,32 +1,26 @@
 <h2>Harvest report index</h2>
 
-
-<h5>Record counts</h5>
-<% %w(Organization Project User Task Entry).each do |m| %>
-<p><%= m %>: <%= Object.const_get(m).count %></p>
-<% end %>
-
 <h3>Detailed Time Report</h3>
-<%= @groups.length %> Groups
 
 <form action="" method="get">
-  <%= select_tag(:group_by, options_for_select([ 'User', 'Task', 'Organization', 'Date' ], params[:group_by])) %>
-  <%= submit_tag('Update') %>
+  <%= label_tag :group_by %>
+  <%= select_tag(:group_by, options_for_select([ 'Staff', 'Task', 'Organization', 'Date' ], params[:group_by]), onchange: "this.form.submit()") %>
 </form>
+
 <table width="100%">
-  <thead class="tabular">
-      <tr>
-        <th>Date</th>
-        <th>Organization</th>
-        <th>Project</th>
-        <th>Task</th>
-        <th>Person</th>
-        <th>Hours</th>
-      </tr>
-    </thead>
+  <thead >
+    <tr>
+      <th>Date</th>
+      <th>Organization</th>
+      <th>Project</th>
+      <th>Task</th>
+      <th>Person</th>
+      <th>Hours</th>
+    </tr>
+  </thead>
 
   <% @groups.each do |grouped_value, group| %>
-    <tr style="background-color: #ccc">
+    <tr style="background-color: #d2e6f3;">
       <td colspan="5"><%= grouped_value %></td>
       <td class="dt-hours"><%= number_with_precision(group.sum(&:hours), precision: 2) %></td>
     </tr>

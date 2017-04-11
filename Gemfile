@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'harvested'
 gem 'figaro' # For managing secrets - ex: figaro heroku:set -e production
+gem 'foundation-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

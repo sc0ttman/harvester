@@ -13,7 +13,7 @@ class Entry < ApplicationRecord
       all.group_by{ |e| e.task.name }
     when 'organization'
       all.group_by{ |e| e.organization.name }
-    else #user
+    else # user / staff
       all.group_by{ |e| e.user.full_name }
     end
   end
