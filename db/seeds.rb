@@ -10,7 +10,7 @@
 # Build Organizations from secret ENV settings.
 SyncService::ORGANIZATION_ENV_PREFIXES.each do |env_prefix|
   settings = SyncService.env_vars_from_prefix(env_prefix)
-  Organization.create( name: env_prefix.sub('harvest_',''), code:env_prefix, harvest_project: settings[:project_id],
+  Organization.create( name: env_prefix.sub('harvest_','').titleize, code:env_prefix, harvest_project: settings[:project_id],
         harvest_subdomain: settings[:subdomain], harvest_username: settings[:username], harvest_password: settings[:password] )
 
 end

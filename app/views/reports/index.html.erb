@@ -2,13 +2,13 @@
 
 <h3>Detailed Time Report</h3>
 
-<form action="" method="get">
+<%= form_tag('/', method: :get) do |f| %>
   <%= label_tag :group_by %>
   <%= select_tag(:group_by, options_for_select([ 'Staff', 'Task', 'Organization', 'Date' ], params[:group_by]), onchange: "this.form.submit()") %>
-</form>
+<% end %>
 
-<table width="100%">
-  <thead >
+<table class="hover">
+  <thead>
     <tr>
       <th>Date</th>
       <th>Organization</th>
@@ -20,6 +20,7 @@
   </thead>
 
   <% @groups.each do |grouped_value, group| %>
+  <tbody>
     <tr style="background-color: #d2e6f3;">
       <td colspan="5"><%= grouped_value %></td>
       <td class="dt-hours"><%= number_with_precision(group.sum(&:hours), precision: 2) %></td>
@@ -28,12 +29,13 @@
     <% group.each do |entry|  %>
     <tr>
       <td><small><%= entry.spent_at %></small></td>
-      <td><small><%= entry.user.organization.name %></small></td>
-      <td><small><%= entry.project.name %></small></td>
-      <td><small><%= entry.task.name %></small></td>
-      <td><small><%= entry.user.full_name %></small></td>
+      <td><small><%= entry.user.try(:organization).try(:name) %></small></td>
+      <td><small><%= entry.project.try(:name) %></small></td>
+      <td><small><%= entry.task.try(:name) %></small></td>
+      <td><small><%= entry.user.try(:full_name) %></small></td>
       <td><small><%= entry.hours %></small></td>
     </tr>
     <% end %>
+  </tbody>
   <% end %>
 </table>

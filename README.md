@@ -6,13 +6,13 @@ Simple Rails app used to consolidate timesheet reports for shared projects acros
 
 ```sh
 $ bundle install
-$ rails db:migrate
 ```
 Create local database `harvester_development`
+```sh
+$ rails db:migrate
+```
 
 Rename `config/application.yml.example` to `config/application.yml` and fill in Harvest account info.
-
-Ex:
 ```yml
 harvest_mycompany_subdomain: myharvestsubdomain
 harvest_mycompany_username:
@@ -34,7 +34,7 @@ ORGANIZATION_ENV_PREFIXES = %w(harvest_mycompany harvest_partner)
 
 ```
 
-Seed you Organizations:
+Seed your Organizations:
 ```sh
 $ rails db:seed
 ```
