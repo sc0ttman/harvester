@@ -4,12 +4,12 @@ ORGANIZATION_ENV_PREFIXES = %w(harvest_paradem harvest_partner)
 
 class SyncService
 
-  def initialize()
+  def initialize(api_service = HarvestService)
     @harvest_clients = []
 
     # Instantiate Harvest clients for each Org set in ENV
     ORGANIZATION_ENV_PREFIXES.each do |env_prefix|
-      @harvest_clients << HarvestService.new(SyncService.env_vars_from_prefix(env_prefix))
+      @harvest_clients << api_service.new(SyncService.env_vars_from_prefix(env_prefix))
     end
   end
 

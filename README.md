@@ -39,7 +39,7 @@ Seed your Organizations:
 $ rails db:seed
 ```
 
-Sync you Harvest data:
+Sync the Harvest data:
 ```sh
 $ rails sync:all
 ```

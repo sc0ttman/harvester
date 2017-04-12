@@ -1,13 +1,15 @@
 require 'harvested'
 
 class HarvestService
+  attr_reader :client
 
-  def initialize(params)
+  # Dependency Injection
+  def initialize(params, api: Harvest )
     @subdomain  = params[:subdomain]
     @username   = params[:username]
     @password   = params[:password]
     @project_id = params[:project_id]
-    @client   ||= Harvest.hardy_client(subdomain: @subdomain, username: @username, password: @password)
+    @client   ||= api.hardy_client(subdomain: @subdomain, username: @username, password: @password)
   end
 
   def get_project_entries(from: Time.parse("01/01/2016"), to: Time.now)
@@ -27,7 +29,7 @@ class HarvestService
   end
 
   def find_organization
-    Organization.where(harvest_project: @project_id).first
+    Organization.where(harvest_project: @project_id.to_i).first
   end
 
 end
