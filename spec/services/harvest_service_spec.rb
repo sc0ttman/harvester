@@ -25,9 +25,6 @@ RSpec.describe HarvestService, type: :service do
   let! (:org){ Organization.create name: 'test', code: 't', harvest_project: harvest_credentials[:project_id] }
 
   context 'initialize' do
-    # allow_any_instance_of(FakeHarvestAPI).to receive(:enough_files_uploaded?).and_return(true)
-    # FakeHarvestAPI.any_instance.should_receive(:hardy_client).and_return(:return_value)
-
     it 'parses params properly' do
       expect(service.instance_variable_get(:@subdomain)).to eq harvest_credentials[:subdomain]
       expect(service.instance_variable_get(:@username)).to eq harvest_credentials[:username]
@@ -43,8 +40,7 @@ RSpec.describe HarvestService, type: :service do
 
   context '#get_project_entries' do
     it 'queries time entries for a project within a range' do
-      # allow_any_instance_of(FakeHardyClient).to receive_message_chain(:reports, :time_by_project).and_return(1)
-      expect_any_instance_of(FakeHardyClient).to receive_message_chain(:reports, :time_by_project) #.with([]).and_return(FakeHardyClient)
+      expect_any_instance_of(FakeHardyClient).to receive_message_chain(:reports, :time_by_project)
       service.get_project_entries
     end
   end

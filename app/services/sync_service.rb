@@ -17,7 +17,7 @@ class SyncService
   def sync_entries
     Entry.delete_all
     @harvest_clients.each do |client|
-      entries = client.get_project_entries()
+      entries = client.get_project_entries
       organization = client.find_organization
       puts "getting entries for org: #{client.get_project} Entries count: #{entries.length}"
       entries.each{|e| valid_attrs = e.select{|x| Entry.attribute_names.index(x.to_s)}; ar=organization.entries.create(valid_attrs); puts "#{e.errors.full_messages.to_sentence}" if ar.errors.any? }
