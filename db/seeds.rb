@@ -14,3 +14,6 @@ SyncService::ORGANIZATION_ENV_PREFIXES.each do |env_prefix|
         harvest_subdomain: settings[:subdomain], harvest_username: settings[:username], harvest_password: settings[:password] )
 
 end
+
+# Create admins
+user = Admin.create!(email: 'admin@test.com', password: 'password', password_confirmation: 'password')

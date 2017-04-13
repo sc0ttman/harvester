@@ -2,10 +2,14 @@
 
 <h3>Detailed Time Report</h3>
 
-<%= form_tag('/', method: :get) do |f| %>
-  <%= label_tag :group_by %>
-  <%= select_tag(:group_by, options_for_select([ 'Staff', 'Task', 'Organization', 'Date' ], params[:group_by]), onchange: "this.form.submit()") %>
-<% end %>
+<div class="row">
+  <div class="large-4 small-12 columns">
+  <%= form_tag('/', method: :get) do |f| %>
+    <%= label_tag :group_by %>
+    <%= select_tag(:group_by, options_for_select([ 'Staff', 'Task', 'Organization', 'Date' ], params[:group_by]), onchange: "this.form.submit()") %>
+  <% end %>
+  </div>
+</div>
 
 <table class="hover">
   <thead>
@@ -21,7 +25,7 @@
 
   <% @groups.each do |grouped_value, group| %>
   <tbody>
-    <tr style="background-color: #d2e6f3;">
+    <tr style="background-color: #1EB4D2;">
       <td colspan="5"><%= grouped_value %></td>
       <td class="dt-hours"><%= number_with_precision(group.sum(&:hours), precision: 2) %></td>
     </tr>

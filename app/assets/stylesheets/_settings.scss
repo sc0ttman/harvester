@@ -49,13 +49,16 @@
 $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
+
+// #2a547a ,#1EB4D2 ,#1eb4d2 ,#FFFFFF ,#4d4d4d ,#FFFFFF ,#f2b93b ,#1eb4d2
 $foundation-palette: (
-  primary: #1779ba,
-  secondary: #767676,
-  success: #3adb76,
+  primary: #2a547a,
+  secondary: #4d4d4d,
+  success: #1EB4D2,
   warning: #ffae00,
   alert: #cc4b37,
 );
+
 $light-gray: #e6e6e6;
 $medium-gray: #cacaca;
 $dark-gray: #8a8a8a;
@@ -612,9 +615,10 @@ $tooltip-radius: $global-radius;
 // 37. Top Bar
 // -----------
 
+// #2a547a ,#1EB4D2 ,#1eb4d2 ,#FFFFFF ,#4d4d4d ,#FFFFFF ,#f2b93b ,#1eb4d2
 $topbar-padding: 0.5rem;
-$topbar-background: $light-gray;
-$topbar-submenu-background: $topbar-background;
+$topbar-background: #1EB4D2;
+$topbar-submenu-background: #fff;
 $topbar-title-spacing: 0.5rem 1rem 0.5rem 0;
 $topbar-input-width: 200px;
 $topbar-unstack-breakpoint: medium;

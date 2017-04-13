@@ -11,10 +11,10 @@
 // about supported directives.
 //
 // Removed all these libs until they are actually needed
-// require jquery
-// require jquery_ujs
-// require foundation
+//= require jquery
+//= require jquery_ujs
+//= require foundation
 // require turbolinks
 // require_tree .
 
-// $(function(){ $(document).foundation(); });
+$(function(){ $(document).foundation(); });

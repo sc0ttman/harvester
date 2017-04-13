@@ -34,7 +34,7 @@ ORGANIZATION_ENV_PREFIXES = %w(harvest_mycompany harvest_partner)
 
 ```
 
-Seed your Organizations:
+Seed your Organizations and Admin users:
 ```sh
 $ rails db:seed
 ```

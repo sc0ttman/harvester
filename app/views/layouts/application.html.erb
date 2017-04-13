@@ -11,8 +11,28 @@
   </head>
 
   <body>
+    <div class="top-bar">
+      <div class="top-bar-title">Harvester</div>
+      <div>
+        <div class="top-bar-left"></div>
+        <div class="top-bar-right">
+          <% if admin_signed_in? %>
+          <ul class="dropdown menu" data-dropdown-menu>
+            <li>
+              <a href="#"><%= current_admin.email %></a>
+              <ul class="menu vertical">
+                <li><%= link_to 'Sign out' , destroy_admin_session_path, method: :delete %></li>
+              </ul>
+            </li>
+          </ul>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
     <div class="row">
-      <div class="columns small-12">
+      <div class="columns small-12" style='margin-top: 20px'>
+        <%= display_flash_messages %>
         <%= yield %>
       </div>
     </div>
