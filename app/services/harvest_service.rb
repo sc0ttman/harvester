@@ -1,7 +1,7 @@
 require 'harvested'
 
 class HarvestService
-  attr_reader :client
+  attr_reader :client, :subdomain
 
   def initialize(params, api = Harvest )
     @subdomain  = params[:subdomain]

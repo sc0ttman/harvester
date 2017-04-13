@@ -23,6 +23,7 @@ class SyncService
       data = client.get_data_from_harvest(object_name, options)
       data = [data] unless data.is_a? Array # import requires array
 
+      puts "Syncing #{object_name} data for #{client.subdomain}. Importing #{data.length} records."
       # Since everything belongs to this organization, add the key/value to
       # every result.
       data.each {|h| h[:organization_id] = organization.id }

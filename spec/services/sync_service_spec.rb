@@ -1,7 +1,9 @@
 require 'rails_helper'
 
+# Stub out class api
 class FakeHarvestService
   def initialize(opts); end
+  def subdomain; end
   def get_project_entries; end
   def find_organization; end
   def get_users; end
@@ -21,6 +23,7 @@ RSpec.describe HarvestService, type: :service do
 
   before do
     allow_any_instance_of(FakeHarvestService).to receive(:find_organization).and_return(org)
+    allow_any_instance_of(FakeHarvestService).to receive(:subdomain).and_return(org.name)
     allow_any_instance_of(FakeHarvestService).to receive(:get_data_from_harvest).with(:entry, {}).and_return(entries)
     allow_any_instance_of(FakeHarvestService).to receive(:get_data_from_harvest).with(:user, {}).and_return(users)
     allow_any_instance_of(FakeHarvestService).to receive(:get_data_from_harvest).with(:project, {}).and_return(project)
