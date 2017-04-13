@@ -49,6 +49,10 @@ Open your app: http://harvester.dev
 
 # Deploying to Heroku
 
+You must first install the addons:
+* [Redis add-on](https://elements.heroku.com/addons/heroku-redis)
+* [Postgress add-on](https://elements.heroku.com/addons/heroku-postgresql) (This might be installed automaically)
+
 ```sh
 $ heroku create
 $ heroku ps:scale web=1
@@ -56,7 +60,7 @@ $ heroku ps:scale web=1
 # Import config vars from yml
 $ figaro heroku:set -e production
 
-# Verify config vars are set
+# Verify config vars are set (Harvest accounts, REDIS_URL, DATABASE_URL)
 $ heroku config
 
 $ git push heroku master
