@@ -21,15 +21,25 @@
         <img src="http://placekitten.com/400/130?image=<%= index %>"></a>
       <% end %>
       <div class="card-section">
+        <h5>Account config</h5>
         <ul>
           <li><small>Name: <code><%= org.name %></code></small></li>
           <li><small>Code: <code><%= org.code %></code></small></li>
           <li><small>Subdomain: <code><%= org.harvest_subdomain %></code></small></li>
-          <li><small>Project: <code><%= org.harvest_project %></code></small></li>
+          <li><small>Project id: <code><%= org.harvest_project %></code></small></li>
+          <li><small>Project name: <code><%= org.configured_project.try(:name) %></code></small></li>
           <li><small>Username: <code>****</code></small></li>
           <li><small>Password: <code>****</code></small></li>
         </ul>
+
+        <h5>Staff</h5>
+        <ul>
+          <% org.users.each do |u| %>
+          <li><%= u.full_name %> <small>(<%= pluralize u.entries.count, 'time entry' %>)</small></li>
+          <% end %>
+        </ul>
       </div>
+
     </div>
   </div>
   <% end %>
