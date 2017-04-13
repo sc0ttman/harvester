@@ -15,3 +15,33 @@
  *= require foundation_and_overrides
 
  */
+
+// Basic customizations
+// #2a547a ,#1EB4D2 ,#1eb4d2 ,#FFFFFF ,#4d4d4d ,#FFFFFF ,#f2b93b ,#1eb4d2
+
+.main-container{
+  margin-top: 20px;
+}
+
+// Top bar
+.top-bar-title{
+  color: #fff;
+  font-weight: bold;
+}
+.top-bar .is-dropdown-submenu-parent > a{
+  color: #fff;
+}
+.top-bar .is-submenu-item > a:hover{
+  background-color: #fffffe;
+  text-decoration: underline;
+}
+.top-bar .dropdown.menu > li.is-dropdown-submenu-parent > a::after {
+  border-color: #fff transparent transparent;
+}
+
+// Reports
+.reports-table{
+  .report-group-heading{
+    background-color: #d2edf3;
+  }
+}

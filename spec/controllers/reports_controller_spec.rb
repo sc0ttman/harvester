@@ -2,11 +2,13 @@ require 'rails_helper'
 
 RSpec.describe ReportsController, type: :controller do
   let(:entries) { FactoryGirl.create_list(:entry, 5) }
+  let(:admin_user) { FactoryGirl.create :admin }
 
   context 'as anonymous user' do
     describe '#index' do
       before do
         entries
+        sign_in admin_user
         get :index
       end
 

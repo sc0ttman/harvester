@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<table class="hover">
+<table class="hover reports-table">
   <thead>
     <tr>
       <th>Date</th>
@@ -25,7 +25,7 @@
 
   <% @groups.each do |grouped_value, group| %>
   <tbody>
-    <tr style="background-color: #1EB4D2;">
+    <tr class="report-group-heading">
       <td colspan="5"><%= grouped_value %></td>
       <td class="dt-hours"><%= number_with_precision(group.sum(&:hours), precision: 2) %></td>
     </tr>
