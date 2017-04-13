@@ -65,3 +65,10 @@ $ heroku run rake db:seed
 $ heroku run rake sync:all
 $ heroku open
 ```
+
+# TODO
+
+*  Build config CRUD
+*  Fuzzy task name matching between organizations (currently has to be exact)
+*  Polling for new timesheet entries only (currently nukes everything)
+*  Caching report calculations
