@@ -14,6 +14,7 @@ $ rails db:migrate
 
 Rename `config/application.yml.example` to `config/application.yml` and fill in Harvest account info.
 ```yml
+# Follow the naming convention: "harvest_<namewithoutspaces>_<config_var>"
 harvest_mycompany_subdomain: myharvestsubdomain
 harvest_mycompany_username:
 harvest_mycompany_password:
@@ -27,6 +28,7 @@ harvest_partner_project_id: '<grab id from partner project url>'
 harvest_anotherpartner_subdomain: ...
 
 ```
+<sup>Note: Try restarting Spring if changes aren't taking effect: `$ spring stop`</sup>
 
 Seed your Organizations and Admin users:
 ```sh
@@ -35,7 +37,7 @@ $ rails db:seed
 
 Sync the Harvest data:
 ```sh
-$ rails sync:all
+$ rails sync:all # This will create a job in Sidekiq but should be picked up right away
 ```
 
 Open your app: http://harvester.dev

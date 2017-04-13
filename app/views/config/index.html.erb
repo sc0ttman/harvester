@@ -1,0 +1,37 @@
+
+<nav aria-label="You are here:" role="navigation">
+  <ul class="breadcrumbs">
+    <li><a href="/">Reports</a></li>
+    <li>
+      <span class="show-for-sr">Config</span>
+    </li>
+  </ul>
+</nav>
+
+<h5>Configured Accounts</h5>
+
+<div class="row small-up-2 medium-up-3">
+  <% Organization.all.each_with_index do |org, index| %>
+  <div class="column">
+    <div class="card">
+      <div class="card-divider">
+        <h4><%= org.name %></h4>
+      </div>
+      <%= link_to "http://#{org.try(:harvest_subdomain)}.harvestapp.com/projects/#{org.try(:harvest_project)}", target: '_blank' do %>
+        <img src="http://placekitten.com/400/130?image=<%= index %>"></a>
+      <% end %>
+      <div class="card-section">
+        <ul>
+          <li><small>Name: <code><%= org.name %></code></small></li>
+          <li><small>Code: <code><%= org.code %></code></small></li>
+          <li><small>Subdomain: <code><%= org.harvest_subdomain %></code></small></li>
+          <li><small>Project: <code><%= org.harvest_project %></code></small></li>
+          <li><small>Username: <code>****</code></small></li>
+          <li><small>Password: <code>****</code></small></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+</div>

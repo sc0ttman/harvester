@@ -13,7 +13,10 @@
 # Currently this app requires at least 2 Harvest accounts in order to
 # aggregate time sheet data for a shared project.
 # To set ENV vars on Heroku run: $ figaro heroku:set -e production
-# Currently the app requires the following:
+
+# Currently the app requires Harvest account config that
+# follows the convention "harvest_<namewithoutspaces>_<config>"
+# You can have as many accounts as you like with this convention.
 harvest_mycompany_subdomain: myharvestsubdomain
 harvest_mycompany_username:
 harvest_mycompany_password:
