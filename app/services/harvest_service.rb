@@ -3,8 +3,7 @@ require 'harvested'
 class HarvestService
   attr_reader :client
 
-  # Dependency Injection
-  def initialize(params, api: Harvest )
+  def initialize(params, api = Harvest )
     @subdomain  = params[:subdomain]
     @username   = params[:username]
     @password   = params[:password]
@@ -30,6 +29,19 @@ class HarvestService
 
   def find_organization
     Organization.where(harvest_project: @project_id.to_i).first
+  end
+
+  def get_data_from_harvest(object_name, options={})
+    case object_name.to_sym
+    when :entry
+      get_project_entries(options)
+    when :user
+      get_users
+    when :task
+      get_tasks
+    when :project
+      get_project
+    end
   end
 
 end

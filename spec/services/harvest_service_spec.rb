@@ -21,7 +21,7 @@ RSpec.describe HarvestService, type: :service do
     password:  'pass',
     project_id: '99'
   }}
-  let (:service) { HarvestService.new(harvest_credentials, api: FakeHarvestAPI) }
+  let (:service) { HarvestService.new(harvest_credentials, FakeHarvestAPI) }
   let! (:org){ Organization.create name: 'test', code: 't', harvest_project: harvest_credentials[:project_id] }
 
   context 'initialize' do

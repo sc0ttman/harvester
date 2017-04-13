@@ -13,49 +13,26 @@ class SyncService
     end
   end
 
+  def sync_data(object_name, options = {})
+    object = object_name.to_s.classify.constantize
+    object.delete_all
 
-  def sync_entries
-    Entry.delete_all
     @harvest_clients.each do |client|
-      entries = client.get_project_entries
       organization = client.find_organization
-      puts "getting entries for org: #{client.get_project} Entries count: #{entries.length}"
-      entries.each{|e| valid_attrs = e.select{|x| Entry.attribute_names.index(x.to_s)}; ar=organization.entries.create(valid_attrs); puts "#{e.errors.full_messages.to_sentence}" if ar.errors.any? }
+
+      data = client.get_data_from_harvest(object_name, options)
+      data = [data] unless data.is_a? Array # import requires array
+
+      # Since everything belongs to this organization, add the key/value to
+      # every result.
+      data.each {|h| h[:organization_id] = organization.id }
+      object.transaction do
+        object.import(object.attribute_names, data, validate: false)
+      end
+
     end
   end
 
-  def sync_users
-    User.delete_all
-
-    # TODO: We may have to signify organization our own way
-    @harvest_clients.each do |client|
-      users = client.get_users
-      organization = client.find_organization
-      puts "Syncing users from Harvest. Users count: #{users.length}. Org: #{organization.id}"
-      users.each{|u| valid_attrs = u.select{|x| User.attribute_names.index(x.to_s)}; ar=organization.users.create(valid_attrs); puts "#{e.errors.full_messages.to_sentence}" if ar.errors.any? }
-    end
-  end
-
-  def sync_projects
-    Project.delete_all
-
-    @harvest_clients.each do |client|
-      project = client.get_project
-      organization = client.find_organization
-      valid_attrs = project.select{|x| Project.attribute_names.index(x.to_s)}
-      organization.projects.create(valid_attrs)
-    end
-  end
-
-  def sync_tasks
-    Task.delete_all
-
-    @harvest_clients.each do |client|
-      tasks = client.get_tasks
-      organization = client.find_organization
-      tasks.each{|t| valid_attrs = t.select{|x| Task.attribute_names.index(x.to_s)}; ar=organization.tasks.create(valid_attrs); puts "#{e.errors.full_messages.to_sentence}" if ar.errors.any? }
-    end
-  end
 
   def self.env_vars_from_prefix(prefix)
     {
