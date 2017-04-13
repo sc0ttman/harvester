@@ -16,7 +16,7 @@ class SyncService
   end
 
   def self.organization_prefixes
-    Figaro.application.configuration.keys.map{ |k| k.match(/(harvest_[a-z]*)_w*/i).captures.first }.uniq
+    ENV.keys.map{ |k| match = k.match(/(harvest_[a-z]*)_w*/i); match.captures.first if match }.compact.uniq
   end
 
   def sync_data(object_name, options = {})
