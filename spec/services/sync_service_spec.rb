@@ -19,6 +19,9 @@ RSpec.describe HarvestService, type: :service do
   let (:users) { FactoryGirl.build_list(:harvest_user, 2) }
   let (:project) { FactoryGirl.build(:harvest_project) }
   let (:tasks) { FactoryGirl.build_list(:harvest_task, 5) }
+  let (:env_config){
+    ["harvest_paradem_subdomain", "harvest_paradem_username", "harvest_paradem_password", "harvest_paradem_project_id", "harvest_partner_subdomain", "harvest_partner_username", "harvest_partner_password", "harvest_partner_project_id"]
+  }
   # let (:project)
 
   before do
@@ -28,6 +31,9 @@ RSpec.describe HarvestService, type: :service do
     allow_any_instance_of(FakeHarvestService).to receive(:get_data_from_harvest).with(:user, {}).and_return(users)
     allow_any_instance_of(FakeHarvestService).to receive(:get_data_from_harvest).with(:project, {}).and_return(project)
     allow_any_instance_of(FakeHarvestService).to receive(:get_data_from_harvest).with(:task, {}).and_return(tasks)
+
+    # Stub out config keys
+    allow_any_instance_of(Figaro).to receive_message_chain(:application, :configuration, :keys).and_return(env_config)
   end
 
   context 'initialize' do

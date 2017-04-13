@@ -43,5 +43,8 @@
 .reports-table{
   .report-group-heading{
     background-color: #d2edf3;
+    &:hover{
+      background-color: #d2edf3;
+    }
   }
 }

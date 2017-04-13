@@ -24,13 +24,7 @@ harvest_partner_username:
 harvest_partner_password:
 harvest_partner_project_id: '<grab id from partner project url>'
 
-```
-
-Make sure prefixes in `sync_service.rb` match your ENV var prefix names:
-```rb
-# app/services/sync_service.rb
-
-ORGANIZATION_ENV_PREFIXES = %w(harvest_mycompany harvest_partner)
+harvest_anotherpartner_subdomain: ...
 
 ```
 

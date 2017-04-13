@@ -1,16 +1,22 @@
-# For now this data should be set in your ENV vars.
-# This is currently done for you automatically by Figaro if you have the application.yml file configured
-ORGANIZATION_ENV_PREFIXES = %w(harvest_paradem harvest_partner)
-
 class SyncService
 
   def initialize(api_service = HarvestService)
+    @api_service = api_service
     @harvest_clients = []
+    @prefixes = SyncService.organization_prefixes
 
+    create_clients
+  end
+
+  def create_clients
     # Instantiate Harvest clients for each Org set in ENV
-    ORGANIZATION_ENV_PREFIXES.each do |env_prefix|
-      @harvest_clients << api_service.new(SyncService.env_vars_from_prefix(env_prefix))
+    @prefixes.each do |env_prefix|
+      @harvest_clients << @api_service.new(SyncService.env_vars_from_prefix(env_prefix))
     end
+  end
+
+  def self.organization_prefixes
+    Figaro.application.configuration.keys.map{ |k| k.match(/(harvest_[a-z]*)_w*/i).captures.first }.uniq
   end
 
   def sync_data(object_name, options = {})
