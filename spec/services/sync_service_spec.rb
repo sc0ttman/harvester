@@ -19,9 +19,15 @@ RSpec.describe HarvestService, type: :service do
   let (:users) { FactoryGirl.build_list(:harvest_user, 2) }
   let (:project) { FactoryGirl.build(:harvest_project) }
   let (:tasks) { FactoryGirl.build_list(:harvest_task, 5) }
-  let (:env_config){
-    ["harvest_paradem_subdomain", "harvest_paradem_username", "harvest_paradem_password", "harvest_paradem_project_id", "harvest_partner_subdomain", "harvest_partner_username", "harvest_partner_password", "harvest_partner_project_id"]
+  let (:env){
+    {
+      harvest_partner_subdomain: "test",
+      harvest_partner_username: "test@test.com",
+      harvest_partner_password: "1234",
+      harvest_partner_project_id: "12345678"
+    }
   }
+
   # let (:project)
 
   before do
@@ -33,12 +39,12 @@ RSpec.describe HarvestService, type: :service do
     allow_any_instance_of(FakeHarvestService).to receive(:get_data_from_harvest).with(:task, {}).and_return(tasks)
 
     # Stub out config keys
-    allow_any_instance_of(Figaro).to receive_message_chain(:application, :configuration, :keys).and_return(env_config)
+    stub_const('ENV', env)
   end
 
   context 'initialize' do
     let(:subject) { service }
-    before{ expect(FakeHarvestService).to receive(:new).twice}
+    before{ expect(FakeHarvestService).to receive(:new)}
     it 'builds service objects' do
       subject
     end
@@ -47,28 +53,28 @@ RSpec.describe HarvestService, type: :service do
   context '#sync_entries' do
     let(:subject) { service.sync_data(:entry) }
     it 'creates entries for each Harvest account' do
-      expect { subject }.to change(Entry, :count).by(20) # 10 for each account
+      expect { subject }.to change(Entry, :count).by(10) # 10 for each account
     end
   end
 
   context '#sync_users' do
     let(:subject) { service.sync_data(:user) }
     it 'creates user for each Harvest account' do
-      expect { subject }.to change(User, :count).by(4) # 2 for each account
+      expect { subject }.to change(User, :count).by(2) # 2 for each account
     end
   end
 
   context '#sync_projects' do
     let(:subject) { service.sync_data(:project) }
     it 'creates projects for each Harvest account' do
-      expect { subject }.to change(Project, :count).by(2) # 1 for each account
+      expect { subject }.to change(Project, :count).by(1) # 1 for each account
     end
   end
 
   context '#sync_tasks' do
     let(:subject) { service.sync_data(:task) }
     it 'creates tasks for each Harvest account' do
-      expect { subject }.to change(Task, :count).by(10) # 5 for each account
+      expect { subject }.to change(Task, :count).by(5) # 5 for each account
     end
   end
 
