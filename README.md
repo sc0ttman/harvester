@@ -35,6 +35,13 @@ Seed your Organizations and Admin users:
 $ rails db:seed
 ```
 
+Run Redis and Sidekiq in seperate terminals:
+```sh
+$ redis-server
+$ bundle exec sidekiq -q default -q mailers
+
+```
+
 Sync the Harvest data:
 ```sh
 $ rails sync:all # This will create a job in Sidekiq but should be picked up right away

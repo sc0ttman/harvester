@@ -13,10 +13,9 @@ SyncService.organization_prefixes.each do |env_prefix|
   puts "creating org from prefix: #{env_prefix.sub('harvest_','').titleize} settings: #{settings}"
   org = Organization.where(code: env_prefix).first_or_create( name: env_prefix.sub('harvest_','').titleize, code:env_prefix, harvest_project: settings[:project_id],
         harvest_subdomain: settings[:subdomain], harvest_username: settings[:username], harvest_password: settings[:password] )
-  org.save
-  puts "Errors: #{org.errors.full_messages.join(',')}"
 
 end
 
 # Create admins
-user = Admin.first_or_create(email: 'admin@test.com', password: 'password', password_confirmation: 'password')
+email = 'admin@test.com'
+user = Admin.where(email: email).first_or_create(email: email, password: 'password', password_confirmation: 'password')
