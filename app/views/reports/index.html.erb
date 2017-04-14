@@ -2,10 +2,21 @@
 
 <div class="row">
   <div class="large-4 small-12 columns">
-  <%= form_tag('/', method: :get) do |f| %>
+  <%= form_tag('/', id: 'groupby-form', method: :get) do |f| %>
     <%= label_tag :group_by %>
-    <%= select_tag(:group_by, options_for_select([ 'Staff', 'Task', 'Organization', 'Date' ], params[:group_by]), onchange: "this.form.submit()") %>
+    <%= select_tag(:group_by, options_for_select([ 'Staff', 'Task', 'Organization', 'Date' ], params[:group_by])) %>
   <% end %>
+  </div>
+  <div class="large-1 small-1 columns">
+    <div class="spinner" id="spinner">
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+      <div class="rect5"></div>
+    </div>
+  </div>
+  <div class="large-7 small-12 columns end">
   </div>
 </div>
 

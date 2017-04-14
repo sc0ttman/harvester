@@ -18,3 +18,8 @@
 // require_tree .
 
 $(function(){ $(document).foundation(); });
+
+$(document).on('change', '#groupby-form', function(e) {
+  $('#spinner').show();
+  $(this).closest('form').trigger('submit');
+});
