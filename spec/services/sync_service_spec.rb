@@ -25,7 +25,7 @@ RSpec.describe HarvestService, type: :service do
       harvest_partner_username: "test@test.com",
       harvest_partner_password: "1234",
       harvest_partner_project_id: "12345678"
-    }
+    }.with_indifferent_access
   }
 
   # let (:project)
@@ -76,6 +76,37 @@ RSpec.describe HarvestService, type: :service do
     it 'creates tasks for each Harvest account' do
       expect { subject }.to change(Task, :count).by(5) # 5 for each account
     end
+  end
+
+  context 'class methods' do
+    let (:env_multiple){
+      {
+        harvest_partner_subdomain: "test",
+        harvest_partner_username: "test@test.com",
+        harvest_partner_password: "1111",
+        harvest_partner_project_id: "12345678",
+        harvest_anotherpartner_subdomain: 'test2',
+        harvest_anotherpartner_username: "test2@test.com",
+        harvest_anotherpartner_password: "2222",
+        harvest_anotherpartner_project_id: "2222222",
+        harvest_athirdpartner_subdomain: 'test3',
+        harvest_athirdpartner_username: "test3@test.com",
+        harvest_athirdpartner_password: "3333",
+        harvest_athirdpartner_project_id: "3333333"
+      }.with_indifferent_access
+    }
+    before do
+      stub_const('ENV', env_multiple)
+    end
+
+    it '#organization_prefixes returns all the different harvest account prefixes' do
+      expect(SyncService.organization_prefixes).to match_array ["harvest_partner", "harvest_anotherpartner", "harvest_athirdpartner"]
+    end
+
+    it '#env_vars_from_prefix' do
+        expect(SyncService.env_vars_from_prefix('harvest_athirdpartner')).to include ({ password:"3333", project_id:"3333333", subdomain:"test3", username:"test3@test.com"})
+    end
+
   end
 
 
