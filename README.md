@@ -73,6 +73,15 @@ $ heroku run rake sync:all
 $ heroku open
 ```
 
+# Scheduling on Heroku
+
+```sh
+# Install and launch the addon
+$ heroku addons:create scheduler:standard
+$ heroku addons:open scheduler
+```
+Then just create a new job and add the command `rake sync:all`
+
 # TODO
 
 *  Build config CRUD
